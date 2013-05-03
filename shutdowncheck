@@ -6,9 +6,9 @@ echo "ATXRaspi shutdown script starting..."
 echo "Asserting pins (7=in,low; 8=out,high)"
 
 gpio -g mode 7 in
-gpio -g write 7 down
+gpio -g mode 7 down
 gpio -g mode 8 out
-gpio -g write 8 up
+gpio -g mode 8 up
 
 COUNTER=0
 
