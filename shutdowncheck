@@ -19,7 +19,7 @@ while [ 1 ]; do
     #sleep 1
     if [ "$(/home/pi/wiringPi/gpio/gpio -g read 7)" = "1" ]; then
         echo "PIN7 requested a SYSTEM HALT !"
-        sudo halt
+        sudo shutdown -h now
   break
     fi
     sudo sleep 0.5
