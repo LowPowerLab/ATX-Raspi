@@ -10,20 +10,13 @@ gpio -g write 7 0
 gpio -g mode 8 out
 gpio -g write 8 1
 
-COUNTER=0
-
-#while [ $COUNTER -lt 10 ]; do
 while [ 1 ]; do
-    #echo Looping - counter is $COUNTER
-    #let COUNTER=COUNTER+1
-    #sleep 1
-    if [ "$(/home/pi/wiringPi/gpio/gpio -g read 7)" = "1" ]; then
-        echo "PIN7 requested a SYSTEM HALT !"
-        sudo shutdown -h now
-  break
-    fi
-    sudo sleep 0.5
+  if [ "$(/home/pi/wiringPi/gpio/gpio -g read 7)" = "1" ]; then
+    echo "PIN7 requested a SYSTEM HALT !"
+    sudo poweroff
+    break
+  fi
+  /bin/sleep 0.5
 done
-
 
 exit 0

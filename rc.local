@@ -20,6 +20,6 @@ fi
 # The following line is required for ATXRaspi
 # to start the shutdowncheck script that will listen for a shutdown signal
 # and initiate a "sudo halt" command
-(cd /home/pi && exec ./shutdowncheck) &
+/etc/shutdowncheck &
 
 exit 0
