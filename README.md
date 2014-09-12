@@ -13,7 +13,8 @@ ATXRaspi is a smart power controller for RaspberryPi that allows you to poweroff
 Log into your Pi an run these commands once:
 - sudo wget https://raw.githubusercontent.com/LowPowerLab/ATX-Raspi/master/shutdownchecksetup.sh
 - sudo bash shutdownchecksetup.sh
-- sudo rm shutdowncheck.sh #(this removes the install script since it's no longer necessary)
+- sudo rm shutdowncheck.sh
+The last command will remove the setup script since it's no longer necessary.
 
 ###Enjoy shutting down your Pi from the external button!
 
