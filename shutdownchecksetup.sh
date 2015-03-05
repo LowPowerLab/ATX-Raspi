@@ -4,8 +4,13 @@ echo '#!/bin/bash
 #This is an input from ATXRaspi to the Pi.
 #When button is held for ~3 seconds, this pin will become HIGH signalling to this script to poweroff the Pi.
 SHUTDOWN=7
+REBOOTPULSEMINIMUM=200      #reboot pulse signal should be at least this long
+REBOOTPULSEMAXIMUM=600      #reboot pulse signal should be at most this long
 echo "$SHUTDOWN" > /sys/class/gpio/export
 echo "in" > /sys/class/gpio/gpio$SHUTDOWN/direction
+
+#Added reboot feature (with ATXRaspi R2.6 (or ATXRaspi 2.5 with blue dot on chip)
+#Hold ATXRaspi button for at least 500ms but no more than 2000ms and a reboot HIGH pulse of 500ms length will be issued
 
 #This is GPIO 8 (pin 24 on the pinout diagram).
 #This is an output from Pi to ATXRaspi and signals that the Pi has booted.
@@ -22,9 +27,24 @@ echo "ATXRaspi shutdown script started: asserted pins ($SHUTDOWN=input,LOW; $BOO
 while [ 1 ]; do
   shutdownSignal=$(cat /sys/class/gpio/gpio$SHUTDOWN/value)
   if [ $shutdownSignal = 0 ]; then
-    /bin/sleep 0.5
-  else
-    sudo poweroff
+    /bin/sleep 0.2
+  else  
+    pulseStart=$(date +%s%N | cut -b1-13) # mark the time when Shutoff signal went HIGH (milliseconds since epoch)
+    while [ $shutdownSignal = 1 ]; do
+      /bin/sleep 0.02
+      if [ $(($(date +%s%N | cut -b1-13)-$pulseStart)) -gt $REBOOTPULSEMAXIMUM ]; then
+        echo "ATXRaspi triggered a shutdown signal, halting Rpi ... "
+        sudo poweroff
+        exit
+      fi
+      shutdownSignal=$(cat /sys/class/gpio/gpio$SHUTDOWN/value)
+    done
+    #pulse went LOW, check if it was long enough, and trigger reboot
+    if [ $(($(date +%s%N | cut -b1-13)-$pulseStart)) -gt $REBOOTPULSEMINIMUM ]; then 
+      echo "ATXRaspi triggered a reboot signal, recycling Rpi ... "
+      sudo reboot
+      exit
+    fi
   fi
 done' > /etc/shutdowncheck.sh
 sudo chmod 755 /etc/shutdowncheck.sh
