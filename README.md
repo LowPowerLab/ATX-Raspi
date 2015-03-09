@@ -1,7 +1,10 @@
 ATXRaspi
 =========
 
-ATXRaspi is a smart power controller for RaspberryPi that allows you to poweroff your Pi from [a momentary switch (with LED status)](https://lowpowerlab.com/shop/LEDSwitch).
+ATXRaspi is a smart power controller for RaspberryPi that allows you to poweroff or reboot your Pi from [a momentary switch (with LED status)](https://lowpowerlab.com/shop/LEDSwitch).
+
+##Overview and setup video (click to watch):
+[![ATXRaspi overview](https://farm8.staticflickr.com/7616/16572327060_3dd6c95d24.jpg)](http://www.youtube.com/watch?v=w4vSTq2WhN8)
 
 ##Wiring your Pi to [ATXRaspi](http://www.lowpowerlab.com/atxraspi)
 - GPIO7 (input to Pi) to outgoing arrow pin on ATXRaspi.
@@ -17,7 +20,7 @@ Log into your Pi an run these commands once:
 - sudo reboot
 <br/>The last command will remove the setup script since it's no longer necessary.
 
-###Enjoy shutting down your Pi from the external button!
+###Enjoy shutting down and rebooting your Pi from the external button!
 
 ##Old setup/install method:
 Copy the content of "rc.local" to your "/etc/rc.local"
