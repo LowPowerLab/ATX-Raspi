@@ -19,6 +19,6 @@ Log into your Pi an run the setup script, then remove it and reboot:
 - `sudo rm shutdownchecksetup.sh`
 - `sudo reboot`
 
-##For OpenElec and other details please see the (official guide)[https://lowpowerlab.com/guide/atxraspi/].
+##For OpenElec and other details please see the [official guide](https://lowpowerlab.com/guide/atxraspi/).
 
 ###Enjoy shutting down and rebooting your Pi from the external button!
