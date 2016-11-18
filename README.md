@@ -1,7 +1,7 @@
 ATXRaspi
 =========
 
-ATXRaspi is a smart power controller for RaspberryPi that allows you to poweroff or reboot your Pi from [a momentary switch (with LED status)](https://lowpowerlab.com/shop/LEDSwitch).
+ATXRaspi is a smart power controller for RaspberryPi that allows you to poweroff or reboot your Pi from [a momentary switch (with LED status)](https://lowpowerlab.com/shop/product/118).
 
 ##Overview and setup video (click to watch):
 [![ATXRaspi overview](https://farm8.staticflickr.com/7616/16572327060_3dd6c95d24.jpg)](http://www.youtube.com/watch?v=w4vSTq2WhN8)
@@ -13,17 +13,10 @@ ATXRaspi is a smart power controller for RaspberryPi that allows you to poweroff
 - Connect a momentary button and status LED to ATXRaspi (no resistor needed for LED). You can also get LED integrated momentary switches [from the LowPowerLab webshop](https://lowpowerlab.com/shop/LEDSwitch).
 
 ##Setup/install (recommended):
-Log into your Pi an run these commands once:
-- sudo wget https://raw.githubusercontent.com/LowPowerLab/ATX-Raspi/master/shutdownchecksetup.sh
-- sudo bash shutdownchecksetup.sh
-- sudo rm shutdownchecksetup.sh
-- sudo reboot
-<br/>The last command will remove the setup script since it's no longer necessary.
+Log into your Pi an run the setup script, then remove it and reboot:
+- `sudo wget https://raw.githubusercontent.com/LowPowerLab/ATX-Raspi/master/shutdownchecksetup.sh`
+- `sudo bash shutdownchecksetup.sh`
+- `sudo rm shutdownchecksetup.sh`
+- `sudo reboot`
 
 ###Enjoy shutting down and rebooting your Pi from the external button!
-
-##Old setup/install method:
-Copy the content of "rc.local" to your "/etc/rc.local"
-The only needed code from this file is actually the line that starts up the shutdowncheck script
-Copy the "shutdowncheck" bash script to your home directory - /home/pi/
-Add the proper execute rights to shutdowncheck using chmod: sudo chmod 755 shutdowncheck
