@@ -32,10 +32,10 @@ GPIO.setup(BOOT, GPIO.OUT, initial=GPIO.HIGH)
 # Set up GPIO 7  as interrupt for the shutdown signal to go HIGH
 GPIO.setup(SHUTDOWN, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-print "\n=========================================================================================="
-print "   ATXRaspi shutdown IRQ script started: asserted pins (",SHUTDOWN, "=input,LOW; ",BOOT,"=output,HIGH)"
-print "   Waiting for GPIO", SHUTDOWN, "to become HIGH (short HIGH pulse=REBOOT, long HIGH=SHUTDOWN)..."
-print "=========================================================================================="
+print("\n==========================================================================================")
+print("   ATXRaspi shutdown IRQ script started: asserted pins (",SHUTDOWN, "=input,LOW; ",BOOT,"=output,HIGH)")
+print("   Waiting for GPIO", SHUTDOWN, "to become HIGH (short HIGH pulse=REBOOT, long HIGH=SHUTDOWN)...")
+print("==========================================================================================")
 try:
 	while True:	
 		GPIO.wait_for_edge(SHUTDOWN, GPIO.RISING)
@@ -44,16 +44,16 @@ try:
 		while shutdownSignal:
 			time.sleep(0.2)
 			if(time.time() - pulseStart >= REBOOTPULSEMAXIMUM):
-				print "\n====================================================================================="
-				print "            SHUTDOWN request from GPIO", SHUTDOWN, ", halting Rpi ..."
-				print "====================================================================================="
+				print("\n=====================================================================================")
+				print("            SHUTDOWN request from GPIO", SHUTDOWN, ", halting Rpi ...")
+				print("=====================================================================================")
 				os.system("sudo poweroff")
 				sys.exit()
 			shutdownSignal = GPIO.input(SHUTDOWN)
 		if time.time() - pulseStart >= REBOOTPULSEMINIMUM:
-			print "\n====================================================================================="
-			print "            REBOOT request from GPIO", SHUTDOWN, ", recycling Rpi ..."
-			print "====================================================================================="
+			print("\n=====================================================================================")
+			print("            REBOOT request from GPIO", SHUTDOWN, ", recycling Rpi ...")
+			print("=====================================================================================")
 			os.system("sudo reboot")
 			sys.exit()
 		if GPIO.input(SHUTDOWN): #before looping we must make sure the shutdown signal went low
